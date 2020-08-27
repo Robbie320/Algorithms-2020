@@ -70,8 +70,15 @@
 
 % - -- -  - -- -  - -- -  -
 
-\section{myLimerick}
+\section{Java Limerick}
+\noindent
+The language I'm using is Java, \\
+I hope it won't cause to much drama. \\
+   \hspace*{1.5em}But if it does, \\
+   \hspace*{1.5em}That's all because, \\
+Someone mistook Java for Cava. \\
 
+\section{Practice LaTeX Limerick}
 \noindent
 A high-level language called LaTex, \\
 It's really pronounced like lay-tech. \\
