@@ -1,0 +1,293 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% CMPT 435
+% Fall 2020
+% Assignment 1: Data Structures
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from: http://www.LaTeXTemplates.com
+% Original author: % Frits Wenneker (http://www.howtotex.com)
+% License: CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% Modified by Alan G. Labouseur  - alan@labouseur.com
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[letterpaper, 10pt,DIV=13]{scrartcl} 
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm,xfrac} % Math packages
+\usepackage{sectsty} % Allows customizing section commands
+\usepackage{graphicx}
+\usepackage[lined,linesnumbered,commentsnumbered]{algorithm2e}
+\usepackage{listings}
+\usepackage{parskip}
+\usepackage{lastpage}
+
+\allsectionsfont{\normalfont\scshape} % Make all section titles in default font and small caps.
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{page \thepage\ of \pageref{LastPage}} % Page numbering for right footer
+
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs.
+
+\binoppenalty=3000
+\relpenalty=3000
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+   \normalfont \normalsize 
+   \textsc{CMPT 435 - Fall 2020 - Dr. Labouseur} \\[10pt] % Header stuff.
+   \horrule{0.5pt} \\[0.25cm] 	% Top horizontal rule
+   \huge Assignment 1: Data Structures  \\     	    % Assignment title
+   \horrule{0.5pt} \\[0.25cm] 	% Bottom horizontal rule
+}
+
+\author{Robert Perrone \\ \normalsize robert.perrone1@Marist.edu}
+
+\date{\normalsize\today} 	% Today's date.
+
+\begin{document}
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%   start Displaying coding
+%----------------------------------------------------------------------------------------
+
+\lstset{frame=tb,
+    language=Java,
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=left,
+    stepnumber=1,
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=3
+}
+%----------------------------------------------------------------------------------------
+%   Main Class Code
+%----------------------------------------------------------------------------------------
+\section{Main Class}
+The main class it where all the magic happens.  First the magicitems.txt file is scanned/read (line 13) and then put into an array through a for loop (lines 18-22).  A for loop is used to iterate through each item in the array (lines 28-79).  A nested for loop is then used to add each character of each magicitem onto both the stack and queue through push and enqueue, respecitvely (lines 42-49).  Another nested for loop is used to remove each character of the magicitem from stack and queue using pop and dequeue, respectively (lines 52-67).  The last few steps involve check if the original magicitem (dequeued from the queue) and the revered magicitem (popped from the stack) is the same or not.  If both are the same, then it is a palindrome.  If the original and reveresed are different, the magicitem is not a palindrome (lines 70-74).  Finally, if it's a palindrome, then print out the statement to the system (line 79).
+\begin{lstlisting}
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Main { 
+    public static void main(String[] args) throws FileNotFoundException { 
+        //Initialize Linked List, Stack, Queue
+        LinkedList linkedlist = new LinkedList();
+        Stack stack = new Stack();
+        Queue queue = new Queue();
+        
+        //Initialize scanner to scan through magicitems.txt file
+        Scanner input = new Scanner(new File("src/magicitems.txt"));
+        
+        final int arrSize = 666;
+    
+        //Initialize array to hold the magicitems
+        String[] magicitemsList = new String[arrSize];
+        //Add each item in magicitems to the array
+        for(int i = 0; input.hasNextLine(); i++) {
+            magicitemsList[i] = input.nextLine();
+        }//end for i
+
+        //Print out the array to check
+        //System.out.println(magicitemsList);
+        
+        //For loop to go through each magicitem in the array
+        for(int x = 0; x < magicitemsList.length; x++) {
+            String stackPop = "";
+            String queueDeq = "";
+            String reverse = "";
+            String original="";
+            boolean palindrome = false;
+    
+            String item = magicitemsList[x];
+            item = item.replaceAll(" ", "");
+            item = item.replaceAll("'","");
+            item = item.toUpperCase();
+            //System.out.println(item);
+
+            //For loop to go through each magicitem character in the string
+            for(int j = 0; j < item.length(); j++) {
+                if(!item.equals("")) {
+                    Character chr = item.charAt(j);
+                    //Add item's characters to stack and queue
+                    stack.push(chr.toString());
+                    queue.enqueue(chr.toString());
+                }//end if
+            }//end for j
+    
+            //For loop to go through each magicitem character in the string
+            for(int y = 0; y < item.length(); y++) {
+                if(!item.equals("")) {
+                    //Remove each item's character from stack and queue
+                    stackPop = stack.pop().item;
+                    queueDeq = queue.dequeue().item;
+                    reverse= reverse + stackPop;
+                    original = original + queueDeq;
+                    
+                    /*if(stackPop.equals(queueDeq)) {
+                        palindrome = true;
+                    }else {
+                        palindrome = false;
+                    }*/ //end if
+                    
+                }//end if
+            }//end for i
+            //System.out.println(original + " " + reverse);
+            
+            if(original.equals(reverse)) {
+                palindrome = true;
+            }else {
+                palindrome = false;
+            }
+            
+            if (palindrome == true) {
+                System.out.println("The magic item: " + original + " is a palindrome.");
+            }//end if
+        }//end for x
+    }//end main
+}//end Main Class
+\end{lstlisting}
+%----------------------------------------------------------------------------------------
+%   Stack Class Code
+%----------------------------------------------------------------------------------------
+\section{Stack Class}
+The Stack class has three different functions.  The first function delcared is the isEmpty() function, which returns a boolean value.  This function determines if the stack is empty or not, in which it returns true if empty and false if not empty (lines 3-15).  The next function is the push() function.  This function adds a new item to the stack and then changes the pointer to the old top if there was something on the stack already (lines 16-27).  The last function is the pop() function.  This function returns null if empty but otherwise removes the item from the top of the stack and then makes the value that the popped item referenced as the next Node into the new top (lines 28-44).
+\begin{lstlisting}
+public class Stack {
+    public Node top;
+
+    boolean isEmpty() {
+        /*Stack-Empty(S)
+        * if S.top == 0
+        *   return TRUE
+        * else return FALSE */
+
+        if (top == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    void push(String elem) {
+        /*Push(S,x)
+        * S.top = S.top + 1
+        * S[S.top] = x */
+
+        Node n = new Node();
+        n.item = elem;
+
+        Node prevTop = this.top;
+        this.top = n;
+        n.next = prevTop;
+    }
+    Node pop() {
+        /*Pop(S)
+        * if Stack-Empty(S)
+        *   error "underflow"
+        * else S.top = S.top - 1
+        *   return S[S.top + 1] */
+
+        if (this.isEmpty()) {
+            System.out.print("Stack is empty.");
+            return null;
+        }else {
+            Node retVal = this.top;
+            this.top = this.top.next;
+            return retVal;
+        }
+    }
+}
+\end{lstlisting}
+%----------------------------------------------------------------------------------------
+%   Queue Class Code
+%----------------------------------------------------------------------------------------
+\section{Queue Class}
+The Queue class also contains three functions.  The first being the same isEmpty() function as detailed in the stack class.  This returns true if the queue is empty and false otherwise (lines 5-11).  The enqueue() function addes the new item as the new tail, which it then makes a pointer from the old tail to the new tail (lines 12-31).  The dequeue() function returns null if the queue is empty, but otherwise removes the head from the queue and makes the reference to the next Node the new head (lines 32-49).
+\begin{lstlisting}
+public class Queue {
+    public Node head;
+    public Node tail;
+ 
+    boolean isEmpty() {
+        if (head == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void enqueue(String elem) {
+        /*Enqueue(Q,x)
+        * Q[Q.tail] = x
+        * if Q.tail == Q.length
+        *   Q.tail = 1
+        * else Q.tail = Q.tail + 1 */
+
+        Node n = new Node();
+        n.item = elem;
+    
+        Node prevBack = this.tail;
+        this.tail = n;
+        //n.next = this.tail; <- this ONE line ruined everything and left me puzzled for hours
+        
+        if(isEmpty()) {
+            this.head = this.tail;
+        }else {
+            prevBack.next = tail;
+        }
+    }
+    Node dequeue() {
+        /*Dequeue(Q)
+        * x = Q[Q.head]
+        * if Q.head == Q.length
+        *   Q.head = 1
+        * else Q.head = Q.head + 1
+        * return x */
+
+        if (this.isEmpty()) {
+            System.out.print("Queue is empty.");
+            return null;
+        }else {
+            Node retVal = this.head;
+            this.head = this.head.next;
+            return retVal;
+        }
+    }
+}
+\end{lstlisting}
+\end{document}
