@@ -10,7 +10,7 @@ public class Main {
         Queue queue = new Queue();
         
         //Initialize scanner to scan through magicitems.txt file
-        Scanner input = new Scanner(new File("src/magicitems.txt"));
+        Scanner input = new Scanner(new File("magicitems.txt")); //OR "src/magicitems.txt" for me
         
         final int arrSize = 666;
     
