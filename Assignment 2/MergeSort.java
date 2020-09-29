@@ -4,7 +4,7 @@ public class MergeSort {
 		/*Merge(A,p,q,r)
 		* 	n1 = q - p + 1
 		* 	n2 = r - q
-		* 	let L[1...n1 + 1] R[1...n2 + 1] be new arrays
+		* 	let L[1..n1 + 1] R[1..n2 + 1] be new arrays
 		* 	for i = 1 to n1
 		* 		L[i] = A[p + i - 1]
 		* 	for j = 1 to n2
@@ -20,15 +20,15 @@ public class MergeSort {
 		* 		else A[k] = R[j]
 		* 			j = j + 1 */
 		int n = array.length;
-		int mid = n/2;
+		int  mid = n/2;
 		
 		this.divide(array, n);
 		
 		//print out array to check
-		for(int x = 0; x < n; x++) {
+		/*for(int x = 0; x < n; x++) {
 			System.out.println(array[x]);
-		}//end for x
-		System.out.println();
+		}*/ //end for x
+		//System.out.println();
 		//number of comparisons done during sort
 		System.out.println("Merge Sort Comparisons:");
 		return comparisons;
@@ -49,18 +49,16 @@ public class MergeSort {
 					left[i] = array[i];
 				} else {
 					right[j] = array[i];
+					j += 1;
 				}// end if
 			}// end for i
 			
 			//Keep dividing the whole until n == 1
-			if (n > 1) {
-				divide(left, mid);
-				divide(right, n - mid);
-			}
+			divide(left, mid);
+			divide(right, n - mid);
 			//merge left and right arrays into the whole array.  mid=leftLength n-mid=rightLength
-			else {
-				merge(left, right, array, mid, n - mid);
-			}
+			merge(left, right, array, mid, n - mid);
+			
 		}//end if else
 	}//end sort
 	public static void merge(String[] left, String[] right, String array[], int left_n, int right_n) {
@@ -83,8 +81,8 @@ public class MergeSort {
 		while(rightInt < right_n) {
 			array[arrayInt++] = right[rightInt++];
 		}//end while
-		if(left_n != 0 && right_n != 0) {
+		/*if(left_n != 0 && right_n != 0) {
 			merge(left, right, array, left_n, right_n);
-		}
+		}*/
 	}//end merge
 }//end class MergeSort
