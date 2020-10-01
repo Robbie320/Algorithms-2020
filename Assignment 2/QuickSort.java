@@ -22,10 +22,10 @@ public class QuickSort {
 		this.sort(array, 0, n - 1);
 		
 		//print out array to check
-		for(int x = 0; x < n; x++) {
+		/*for(int x = 0; x < n; x++) {
 			System.out.println(array[x]);
 		} //end for x
-		System.out.println();
+		System.out.println();*/
 		//number of comparisons done during sort
 		System.out.println("Quick Sort Comparisons:");
 		return comparisons;
