@@ -30,9 +30,9 @@ public class Main {
 			magicitemsQuick[i] = item;
 			//System.out.println(item);
 		}//end for i
-		//System.out.println(selectionSort.selectionSort(magicitemsSelection));
-		//System.out.println(insertionSort.insertionSort(magicitemsInsertion));
+		System.out.println(selectionSort.selectionSort(magicitemsSelection));
+		System.out.println(insertionSort.insertionSort(magicitemsInsertion));
 		System.out.println(mergeSort.mergeSort(magicitemsMerge));
-		//System.out.println(quickSort.quickSort(magicitemsQuick));
+		System.out.println(quickSort.quickSort(magicitemsQuick));
 	}//end main
 }//end Main Class
