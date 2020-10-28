@@ -1,1 +1,396 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% CMPT 435
+% Fall 2020
+% Assignment 3: Searching and Hashing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from: http://www.LaTeXTemplates.com
+% Original author: % Frits Wenneker (http://www.howtotex.com)
+% License: CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% Modified by Alan G. Labouseur  - alan@labouseur.com
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[letterpaper, 10pt,DIV=13]{scrartcl} 
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm,xfrac} % Math packages
+\usepackage{sectsty} % Allows customizing section commands
+\usepackage{graphicx}
+\usepackage[lined,linesnumbered,commentsnumbered]{algorithm2e}
+\usepackage{listings}
+\usepackage{parskip}
+\usepackage{lastpage}
+
+\allsectionsfont{\normalfont\scshape} % Make all section titles in default font and small caps.
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{page \thepage\ of \pageref{LastPage}} % Page numbering for right footer
+
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs.
+
+\binoppenalty=3000
+\relpenalty=3000
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+   \normalfont \normalsize 
+   \textsc{CMPT 435 - Fall 2020 - Dr. Labouseur} \\[10pt] % Header stuff.
+   \horrule{0.5pt} \\[0.25cm] 	% Top horizontal rule
+   \huge Assignment 3: Searching and Hashing   \\     	    % Assignment title
+   \horrule{0.5pt} \\[0.25cm] 	% Bottom horizontal rule
+}
+
+\author{Robert Perrone \\ \normalsize robert.perrone1@marist.edu}
+
+\date{\normalsize\today} 	% Today's date.
+
+\begin{document}
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%   start PROBLEM ONE
+%----------------------------------------------------------------------------------------
+\section{Asymptotic Running Times}
+Binary Search: \(O(log_2 n)\) \\
+Linear Search: \(O(n)\) \\
+Hashing get()() Function: \(O(n)\) \\
+
+\section{Results}
+
+\subsection{Linear and Binary Search Comparisons For Each Item}
+Item 1:\\
+FEATHER TOKEN, SWAN BOAT | Index in Sorted List: 225\\
+Linear Search: Number of Comparisons = 224\\
+Binary Search: Number of Comparisons = 7\\
+Item 2:\\
+DREAM WEAVER | Index in Sorted List: 187\\
+Linear Search: Number of Comparisons = 186\\
+Binary Search: Number of Comparisons = 8\\
+Item 3:\\
+FAN OF DEADLY QUILLS | Index in Sorted List: 221\\
+Linear Search: Number of Comparisons = 220\\
+Binary Search: Number of Comparisons = 9\\
+Item 4:\\
+BACKHAND | Index in Sorted List: 39\\
+Linear Search: Number of Comparisons = 38\\
+Binary Search: Number of Comparisons = 9\\
+Item 5:\\
+TELEPORT RIBBON | Index in Sorted List: 586\\
+Linear Search: Number of Comparisons = 585\\
+Binary Search: Number of Comparisons = 8\\
+Item 6:\\
+CLOAK OF DISPLACEMENT, MINOR | Index in Sorted List: 137\\
+Linear Search: Number of Comparisons = 136\\
+Binary Search: Number of Comparisons = 8\\
+Item 7:\\
+RING OF FIRE ABSORBING | Index in Sorted List: 457\\
+Linear Search: Number of Comparisons = 456\\
+Binary Search: Number of Comparisons = 9\\
+Item 8:\\
+ELIXIR OF HIDING | Index in Sorted List: 202\\
+Linear Search: Number of Comparisons = 201\\
+Binary Search: Number of Comparisons = 8\\
+Item 9:\\
+STATUETTE OF TYADRIA | Index in Sorted List: 555\\
+Linear Search: Number of Comparisons = 554\\
+Binary Search: Number of Comparisons = 9\\
+Item 10:\\
+CORONET OF GITH | Index in Sorted List: 151\\
+Linear Search: Number of Comparisons = 150\\
+Binary Search: Number of Comparisons = 8\\
+Item 11:\\
+PINS OF ACUPUNCTURE. | Index in Sorted List: 423\\
+Linear Search: Number of Comparisons = 422\\
+Binary Search: Number of Comparisons = 7\\
+Item 12:\\
+BELT OF GIANT STRENGTH +6 | Index in Sorted List: 57\\
+Linear Search: Number of Comparisons = 56\\
+Binary Search: Number of Comparisons = 9\\
+Item 13:\\
+PEARL OF POWER, 9TH-LEVEL SPELL | Index in Sorted List: 414\\
+Linear Search: Number of Comparisons = 413\\
+Binary Search: Number of Comparisons = 8\\
+Item 14:\\
+CRYSTAL BALL | Index in Sorted List: 155\\
+Linear Search: Number of Comparisons = 154\\
+Binary Search: Number of Comparisons = 5\\
+Item 15:\\
+FIRE STONES | Index in Sorted List: 234\\
+Linear Search: Number of Comparisons = 233\\
+Binary Search: Number of Comparisons = 8\\
+Item 16:\\
+DRUMS OF PANIC | Index in Sorted List: 189\\
+Linear Search: Number of Comparisons = 188\\
+Binary Search: Number of Comparisons = 8\\
+Item 17:\\
+CENSER OF CONTROLLING AIR ELEMENTALS | Index in Sorted List: 117\\
+Linear Search: Number of Comparisons = 116\\
+Binary Search: Number of Comparisons = 9\\
+Item 18:\\
+CRYSTAL BALL WITH SEE INVISIBILITY | Index in Sorted List: 157\\
+Linear Search: Number of Comparisons = 156\\
+Binary Search: Number of Comparisons = 7\\
+Item 19:\\
+SABLE | Index in Sorted List: 495\\
+Linear Search: Number of Comparisons = 494\\
+Binary Search: Number of Comparisons = 8\\
+Item 20:\\
+SHIELD OF TUNORORIZILE | Index in Sorted List: 520\\
+Linear Search: Number of Comparisons = 519\\
+Binary Search: Number of Comparisons = 4\\
+Item 21:\\
+SHELDON'S RING OF THE FISHES | Index in Sorted List: 515\\
+Linear Search: Number of Comparisons = 514\\
+Binary Search: Number of Comparisons = 6\\
+Item 22:\\
+HEALING TORC | Index in Sorted List: 290\\
+Linear Search: Number of Comparisons = 289\\
+Binary Search: Number of Comparisons = 9\\
+Item 23:\\
+PINS OF ACUPUNCTURE. | Index in Sorted List: 423\\
+Linear Search: Number of Comparisons = 422\\
+Binary Search: Number of Comparisons = 7\\
+Item 24:\\
+CLOAK OF THE MANTA RAY | Index in Sorted List: 145\\
+Linear Search: Number of Comparisons = 144\\
+Binary Search: Number of Comparisons = 4\\
+Item 25:\\
+LANTERN OF REVEALING | Index in Sorted List: 338\\
+Linear Search: Number of Comparisons = 337\\
+Binary Search: Number of Comparisons = 6\\
+Item 26:\\
+FALCHION | Index in Sorted List: 220\\
+Linear Search: Number of Comparisons = 219\\
+Binary Search: Number of Comparisons = 8\\
+Item 27:\\
+ROD OF ASCENSION | Index in Sorted List: 484\\
+Linear Search: Number of Comparisons = 483\\
+Binary Search: Number of Comparisons = 6\\
+Item 28:\\
+BUCKLER | Index in Sorted List: 107\\
+Linear Search: Number of Comparisons = 106\\
+Binary Search: Number of Comparisons = 9\\
+Item 29:\\
+FLYTRAP LIQUID | Index in Sorted List: 239\\
+Linear Search: Number of Comparisons = 238\\
+Binary Search: Number of Comparisons = 8\\
+Item 30:\\
+IRON RATS | Index in Sorted List: 331\\
+Linear Search: Number of Comparisons = 330\\
+Binary Search: Number of Comparisons = 8\\
+Item 31:\\
+SUSTAINING SPOON | Index in Sorted List: 565\\
+Linear Search: Number of Comparisons = 564\\
+Binary Search: Number of Comparisons = 8\\
+Item 32:\\
+MANUAL OF GAINFUL EXERCISE +5 | Index in Sorted List: 368\\
+Linear Search: Number of Comparisons = 367\\
+Binary Search: Number of Comparisons = 6\\
+Item 33:\\
+SADDLE BLANKET OF WARMTH | Index in Sorted List: 497\\
+Linear Search: Number of Comparisons = 496\\
+Binary Search: Number of Comparisons = 7\\
+Item 34:\\
+CIRCLET OF PERSUASION | Index in Sorted List: 127\\
+Linear Search: Number of Comparisons = 126\\
+Binary Search: Number of Comparisons = 8\\
+Item 35:\\
+LIGHTNING TOTEM | Index in Sorted List: 343\\
+Linear Search: Number of Comparisons = 342\\
+Binary Search: Number of Comparisons = 5\\
+Item 36:\\
+SEARING TOTEM | Index in Sorted List: 507\\
+Linear Search: Number of Comparisons = 506\\
+Binary Search: Number of Comparisons = 7\\
+Item 37:\\
+CHOPPER | Index in Sorted List: 123\\
+Linear Search: Number of Comparisons = 122\\
+Binary Search: Number of Comparisons = 9\\
+Item 38:\\
+GOTHIC SHIELD | Index in Sorted List: 272\\
+Linear Search: Number of Comparisons = 271\\
+Binary Search: Number of Comparisons = 7\\
+Item 39:\\
+CARPET OF FLYING, 5 FT. BY 10 FT. | Index in Sorted List: 114\\
+Linear Search: Number of Comparisons = 113\\
+Binary Search: Number of Comparisons = 8\\
+Item 40:\\
+STAFF OF TRIPPING | Index in Sorted List: 552\\
+Linear Search: Number of Comparisons = 551\\
+Binary Search: Number of Comparisons = 8\\
+Item 41:\\
+GLOVES OF SWIMMING AND CLIMBING | Index in Sorted List: 262\\
+Linear Search: Number of Comparisons = 261\\
+Binary Search: Number of Comparisons = 8\\
+Item 42:\\
+QUILTED ARMOR | Index in Sorted List: 444
+Linear Search: Number of Comparisons = 443\\
+Binary Search: Number of Comparisons = 7
+
+\subsubsection{Linear and Binary Search Average Number of Comparisons}
+Linear Search: Average Number of Comparisons = 303\\
+Binary Search: Average Number of Comparisons = 7
+
+\subsection{Hashing get() Function Comparisons For Each Item}
+Item 1:\\
+FEATHER TOKEN, SWAN BOAT | Hash Table Index: 143\\
+Hashing get(): Number of Comparisons = 1\\
+Item 2:\\
+DREAM WEAVER | Hash Table Index: 101\\
+Hashing get(): Number of Comparisons = 1\\
+Item 3:\\
+FAN OF DEADLY QUILLS | Hash Table Index: 117\\
+Hashing get(): Number of Comparisons = 1\\
+Item 4:\\
+BACKHAND | Hash Table Index: 56\\
+Hashing get(): Number of Comparisons = 1\\
+Item 5:\\
+TELEPORT RIBBON | Hash Table Index: 99\\
+Hashing get(): Number of Comparisons = 1\\
+Item 6:\\
+CLOAK OF DISPLACEMENT, MINOR | Hash Table Index: 179\\
+Hashing get(): Number of Comparisons = 1\\
+Item 7:\\
+RING OF FIRE ABSORBING | Hash Table Index: 6\\
+Hashing get(): Number of Comparisons = 1\\
+Item 8:\\
+ELIXIR OF HIDING | Hash Table Index: 109\\
+Hashing get(): Number of Comparisons = 1\\
+Item 9:\\
+STATUETTE OF TYADRIA | Hash Table Index: 196\\
+Hashing get(): Number of Comparisons = 1\\
+Item 10:\\
+CORONET OF GITH | Hash Table Index: 51\\
+Hashing get(): Number of Comparisons = 1\\
+Item 11:\\
+PINS OF ACUPUNCTURE. | Hash Table Index: 170\\
+Hashing get(): Number of Comparisons = 1\\
+Item 12:\\
+BELT OF GIANT STRENGTH +6 | Hash Table Index: 163\\
+Hashing get(): Number of Comparisons = 1\\
+Item 13:\\
+PEARL OF POWER, 9TH-LEVEL SPELL | Hash Table Index: 108\\
+Hashing get(): Number of Comparisons = 1\\
+Item 14:\\
+CRYSTAL BALL | Hash Table Index: 111\\
+Hashing get(): Number of Comparisons = 1\\
+Item 15:\\
+FIRE STONES | Hash Table Index: 52\\
+Hashing get(): Number of Comparisons = 1\\
+Item 16:\\
+DRUMS OF PANIC | Hash Table Index: 221\\
+Hashing get(): Number of Comparisons = 1\\
+Item 17:\\
+CENSER OF CONTROLLING AIR ELEMENTALS | Hash Table Index: 34\\
+Hashing get(): Number of Comparisons = 1\\
+Item 18:\\
+CRYSTAL BALL WITH SEE INVISIBILITY | Hash Table Index: 171\\
+Hashing get(): Number of Comparisons = 1\\
+Item 19:\\
+ELIXIR OF HIDING | Hash Table Index: 109\\
+Hashing get(): Number of Comparisons = 2\\
+Item 20:\\
+SHIELD OF TUNORORIZILE | Hash Table Index: 104\\
+Hashing get(): Number of Comparisons = 1\\
+Item 21:\\
+SHELDON'S RING OF THE FISHES | Hash Table Index: 153\\
+Hashing get(): Number of Comparisons = 1\\
+Item 22:\\
+HEALING TORC | Hash Table Index: 98\\
+Hashing get(): Number of Comparisons = 1\\
+Item 23:\\
+PINS OF ACUPUNCTURE. | Hash Table Index: 170\\
+Hashing get(): Number of Comparisons = 1\\
+Item 24:\\
+CLOAK OF THE MANTA RAY | Hash Table Index: 219\\
+Hashing get(): Number of Comparisons = 1\\
+Item 25:\\
+LANTERN OF REVEALING | Hash Table Index: 164\\
+Hashing get(): Number of Comparisons = 1\\
+Item 26:\\
+FALCHION | Hash Table Index: 80\\
+Hashing get(): Number of Comparisons = 1\\
+Item 27:\\
+FAN OF DEADLY QUILLS | Hash Table Index: 117\\
+Hashing get(): Number of Comparisons = 2\\
+Item 28:\\
+BUCKLER | Hash Table Index: 20\\
+Hashing get(): Number of Comparisons = 1\\
+Item 29:\\
+CENSER OF CONTROLLING AIR ELEMENTALS | Hash Table Index: 34\\
+Hashing get(): Number of Comparisons = 2\\
+Item 30:\\
+IRON RATS | Hash Table Index: 158\\
+Hashing get(): Number of Comparisons = 1\\
+Item 31:\\
+SUSTAINING SPOON | Hash Table Index: 204\\
+Hashing get(): Number of Comparisons = 1\\
+Item 32:\\
+MANUAL OF GAINFUL EXERCISE +5 | Hash Table Index: 187\\
+Hashing get(): Number of Comparisons = 1\\
+Item 33:\\
+SADDLE BLANKET OF WARMTH | Hash Table Index: 154\\
+Hashing get(): Number of Comparisons = 1\\
+Item 34:\\
+CIRCLET OF PERSUASION | Hash Table Index: 8\\
+Hashing get(): Number of Comparisons = 1\\
+Item 35:\\
+DREAM WEAVER | Hash Table Index: 101\\
+Hashing get(): Number of Comparisons = 2\\
+Item 36:\\
+STATUETTE OF TYADRIA | Hash Table Index: 196\\
+Hashing get(): Number of Comparisons = 2\\
+Item 37:\\
+CHOPPER | Hash Table Index: 29\\
+Hashing get(): Number of Comparisons = 1\\
+Item 38:\\
+GOTHIC SHIELD | Hash Table Index: 169\\
+Hashing get(): Number of Comparisons = 1\\
+Item 39:\\
+CARPET OF FLYING, 5 FT. BY 10 FT. | Hash Table Index: 26\\
+Hashing get(): Number of Comparisons = 1\\
+Item 40:\\
+STAFF OF TRIPPING | Hash Table Index: 206\\
+Hashing get(): Number of Comparisons = 1\\
+Item 41:\\
+GLOVES OF SWIMMING AND CLIMBING | Hash Table Index: 152\\
+Hashing get(): Number of Comparisons = 1\\
+Item 42:\\
+QUILTED ARMOR | Hash Table Index: 203\\
+Hashing get(): Number of Comparisons = 1
+
+\subsubsection{Hashing get() Function Average Number of Comparisons}
+Hashing get(): Average Number of Comparisons = 1
+
+\end{document}
