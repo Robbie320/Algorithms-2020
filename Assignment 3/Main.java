@@ -93,7 +93,7 @@ public class Main {
 			System.out.println("Hash Table Index: " + key );
 			//Search for element in chained hash and print comparisons
 			hashing.get(hashTableArr, key, target);
-			System.out.println("Hashing get: Number of Comparisons = " + hashing.comparisons);
+			System.out.println("Hashing get(): Number of Comparisons = " + hashing.comparisons);
 			getAvgComparisons += hashing.comparisons;
 		}//end for x
 		
