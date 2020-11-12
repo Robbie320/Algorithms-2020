@@ -138,6 +138,7 @@ public class Main {
 					}
 				}//end while
 				//Print matrix
+				System.out.println("Matrix: ");
 				for(int m = firstVertex; m < vertexCount; m++) {
 					for(int a = firstVertex; a < vertexCount; a++) {
 						System.out.print(" " + matrix[m][a] + " ");
@@ -146,6 +147,7 @@ public class Main {
 				}//end for m
 				
 				//Print adjacency list
+				System.out.println("Adjacency List: ");
 				for(int a = firstVertex; a < vertexCount; a++) {
 					int edgeCount = adjacencyList.get(a).size();
 					System.out.print("[" + (a) + "] ");
@@ -156,6 +158,7 @@ public class Main {
 					System.out.println();
 				}//end for a
 				//System.out.println(Arrays.toString(adjacencyList.toArray()));
+				
 				System.out.println();
 				
 				Node vertexNode = linkedList.search(firstVertex);
