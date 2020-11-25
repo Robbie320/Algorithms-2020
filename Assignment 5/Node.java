@@ -11,11 +11,14 @@ public class Node {
     public int id;
     //public boolean hasBeenProcessed;
     //public boolean markedForProcessing;
-    public ArrayList<Node> neighbors = new ArrayList<>();
+    public ArrayList<Edge> neighbors = new ArrayList<>();
     
     //For Single Source Shortest Path (SSSP)
     public ArrayList<Node> vertices = new ArrayList<>();
-    public ArrayList<Object> directedEdges = new ArrayList<>();
+    //public ArrayList<Object> directedEdges = new ArrayList<>();
+    //Node source
+    //Node destination
+    //int weight
     int distance;
     Node prevVertex;
     
