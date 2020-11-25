@@ -9,7 +9,6 @@ public class Main {
 	public static void main(String[] args) throws FileNotFoundException {
 		//Initialize Classes
 		SelectionSort selectionSort = new SelectionSort();
-		Traversal traversal = new Traversal();
 		SingleSourceShortestPath sssp = new SingleSourceShortestPath();
 		
 		//Initialize scanner to scan through graphs2.txt file
@@ -42,95 +41,89 @@ public class Main {
 		
 		
 		//GRAPHING//
+		//Initialize variables
+		LinkedList graphLinkedList = new LinkedList();
+		int vertexIDNum = 0;
+		
+		int firstVertex = 0;
+		boolean first = true;
+		
+		int vertexCount = 0;
+		int edgeCount = 0;
+		
+		int sourceNum = 0;
+		int destinationNum = 0;
 		//Using commands in the list to set up the graphs
 		for(int c = 0; c < graphFileSize; c++) {
 			if(graphCommandList[c].contains("--")) {
 				//Then this is a comment, so do nothing
 			} else if(graphCommandList[c].contains("new graph")) {
-				//Create new graph node to hold nodes and edges
-				Node graph = new Node();
 				//Create Linked List
-				LinkedList graphLinkedList = new LinkedList();
+				graphLinkedList = new LinkedList();
 				//Initialize variables
-				int vertexIDNum = 0;
-				
-				int firstVertex = 0;
-				boolean first = true;
-				int vertexCount = 0;
-				
-				int sourceNum = 0;
-				int destinationNum = 0;
-				//increment to go to the next line
-				c++;
-				
-				//Add Vertex
-				while(graphCommandList[c].contains("add vertex")) {
-					Node n = new Node();
-					String vertexIDStr = graphCommandList[c].replaceAll("[^\\d-]", "");
-					vertexIDNum = Integer.parseInt(vertexIDStr);
-					//If this is the first vertex
-					if(first) {
-						firstVertex = vertexIDNum;
-						first = false;
-					}//end if
-					
-					//Add vertex node
-					n.id = vertexIDNum;
-					//n.hasBeenProcessed = false;
-					//n.markedForProcessing = false;
-					
-					//Add to Linked List
-					graphLinkedList.insert(n);
-					//Add to graph vertices arrayList
-					graph.vertices.add(n);
-					
-					//Increment number of Vertices
-					vertexCount++;
-					//increment to go to the next line
-					c++;
-				}//end while
-				
-				if(firstVertex == 1) {
-					vertexCount++;
+				vertexIDNum = 0;
+				firstVertex = 0;
+				first = true;
+				vertexCount = 0;
+				edgeCount = 0;;
+				sourceNum = 0;
+				destinationNum = 0;
+			} else if(graphCommandList[c].contains("add vertex")) { //Add Vertex
+				Node n = new Node();
+				String vertexIDStr = graphCommandList[c].replaceAll("[^\\d-]", "");
+				vertexIDNum = Integer.parseInt(vertexIDStr);
+				//If this is the first vertex
+				if(first) {
+					firstVertex = vertexIDNum;
+					first = false;
+					if(firstVertex == 1) {
+						vertexCount++;
+					}
 				}//end if
 				
-				//Add Edge
-				while(graphCommandList[c].contains("add edge")) {
-					//Initialize
-					String[] vertexStrOne;
-					String[] vertexStrTwo;
-					vertexStrOne = graphCommandList[c].replaceAll("[^\\d-]", "").split("-", 2);
-					vertexStrTwo = vertexStrOne[1].split("",2);
-					
-					sourceNum = Integer.parseInt(vertexStrOne[0]);
-					destinationNum = Integer.parseInt(vertexStrTwo[0]);
-					int weight = Integer.parseInt(vertexStrTwo[1]);
-					
-					//Add the vertices to neighbors int Arraylist
-					Node sourceNode = graphLinkedList.search(sourceNum);
-					Node destinationNode = graphLinkedList.search(destinationNum);
-					sourceNode.neighbors.add(destinationNode);
-					graph.vertices.get(sourceNum).neighbors.add(destinationNode);
-					
-					//Add the edge with the weight
-					Edge edgeObj = new Edge(destinationNode, weight);
-					sourceNode.directedEdges.add(edgeObj);
-					graph.vertices.get(sourceNum).directedEdges.add(edgeObj);
-					
-					//increment to go to the next line
-					if(c < graphFileSize - 1) {
-						c++;
-					} else {
-						break;
-					}
-				}//end while
-				System.out.println();
+				//Add vertex node
+				n.id = vertexIDNum;
+				//n.hasBeenProcessed = false;
+				//n.markedForProcessing = false;
 				
-				Node firstVertexNode = graphLinkedList.search(firstVertex);
+				//Add to Linked List
+				graphLinkedList.insert(n);
 				
-				//Single Source Shortest Path (SSSP)
-				sssp.bellmanFord(graph, firstVertexNode);
+				//Increment number of Vertices
+				vertexCount++;
 				
+			} else if(graphCommandList[c].contains("add edge")) { //Add Edge
+				//Initialize
+				String[] vertexStrOne;
+				String[] vertexStrTwo;
+				vertexStrOne = graphCommandList[c].replaceAll("[^\\d-]", "").split("-", 2);
+				vertexStrTwo = vertexStrOne[1].split("",2);
+				
+				sourceNum = Integer.parseInt(vertexStrOne[0]);
+				destinationNum = Integer.parseInt(vertexStrTwo[0]);
+				int weight = Integer.parseInt(vertexStrTwo[1]);
+				
+				//Add the vertices to neighbors int Arraylist
+				Node sourceNode = graphLinkedList.search(sourceNum);
+				Node destinationNode = graphLinkedList.search(destinationNum);
+				
+				//Add the edge with the weight
+				Edge edgeObj = new Edge(destinationNode, weight);
+				sourceNode.neighbors.add(edgeObj);
+				
+				//increment to go to the next line
+				/*if(c < graphFileSize - 1) {
+					c++;
+				} else {
+					break;
+				}*/
+				if(graphCommandList[c+1].isBlank()) {
+					Node firstVertexNode = graphLinkedList.search(firstVertex);
+					
+					//Single Source Shortest Path (SSSP)
+					sssp.bellmanFord(graphLinkedList, firstVertexNode, vertexCount, edgeCount);
+					System.out.println();
+				}
 			} else if(graphCommandList[c].isBlank()) {
 				//System.out.println("This is a blank.");
 				//System.out.println("\n");
@@ -147,7 +140,6 @@ public class Main {
 		LinkedList spiceLinkedList = new LinkedList();
 		Node nodeHead = new Node();
 		Node newNodeHead = new Node();
-		boolean first = true;
 		for(int s = 0; s < spiceFileSize; s++) {
 			if(spiceCommandList[s].contains("--")) {
 				//Then this is a comment, so do nothing
