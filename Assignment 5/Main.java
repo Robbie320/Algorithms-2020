@@ -117,6 +117,8 @@ public class Main {
 				} else {
 					break;
 				}*/
+				edgeCount++;
+				
 				if(graphCommandList[c+1].isBlank()) {
 					Node firstVertexNode = graphLinkedList.search(firstVertex);
 					
