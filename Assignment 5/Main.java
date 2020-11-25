@@ -83,8 +83,6 @@ public class Main {
 				
 				//Add vertex node
 				n.id = vertexIDNum;
-				//n.hasBeenProcessed = false;
-				//n.markedForProcessing = false;
 				
 				//Add to Linked List
 				graphLinkedList.insert(n);
@@ -111,17 +109,17 @@ public class Main {
 				Edge edgeObj = new Edge(destinationNode, weight);
 				sourceNode.neighbors.add(edgeObj);
 				
-				//increment to go to the next line
-				/*if(c < graphFileSize - 1) {
-					c++;
-				} else {
-					break;
-				}*/
 				edgeCount++;
 				
-				if(graphCommandList[c+1].isBlank()) {
+				if(c < graphFileSize-1) {
+					if(graphCommandList[c+1].isBlank()) {
+						Node firstVertexNode = graphLinkedList.search(firstVertex);
+						//Single Source Shortest Path (SSSP)
+						sssp.bellmanFord(graphLinkedList, firstVertexNode, vertexCount, edgeCount);
+						System.out.println();
+					}
+				} else if(c == graphFileSize-1) {
 					Node firstVertexNode = graphLinkedList.search(firstVertex);
-					
 					//Single Source Shortest Path (SSSP)
 					sssp.bellmanFord(graphLinkedList, firstVertexNode, vertexCount, edgeCount);
 					System.out.println();
