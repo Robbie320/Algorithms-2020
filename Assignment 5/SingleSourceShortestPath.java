@@ -6,19 +6,20 @@ public class SingleSourceShortestPath {
 	Edge e;
 	//public ArrayList<Object> edges = new ArrayList<>();
 	
-	public void initSingleSource(Node graph, Node sourceVertex) {
+	public void initSingleSource(LinkedList graphLinkedList, Node sourceVertex, int vertexCount) {
 		/*Init-Single-Source(G,s)
 		* 	for each v ∈ G.V
 		* 		v.d = ∞		//estimate of shortest path distance
 		* 		v.π = NIL	//predecessor vertex
 		*	s.d = 0 */
-		for(Node vertex : graph.vertices) {
+		for(int i = 0; i < vertexCount; i++) {
+			Node vertex = graphLinkedList.search(i);
 			vertex.distance = Integer.MAX_VALUE;
 			vertex.prevVertex = null;
 		}
 		sourceVertex.distance = 0;
 	}
-	public void bellmanFord(Node graph, Node sourceVertex) {
+	public void bellmanFord(LinkedList graphLinkedList, Node sourceVertex, int vertexCount, int edgeCount) {
 		/*Bellman-Ford(G,w,s)
 		* 	Init-Single-Source(G,s)
 		* 	for i = 1 to |G.V| - 1
@@ -28,15 +29,16 @@ public class SingleSourceShortestPath {
 		* 		if v.d > u.d + w(u,v)
 		* 			return FALSE
 		* 	return TRUE */
-		this.initSingleSource(graph, sourceVertex);
-		for(int i = sourceVertex.id; i < (graph.vertices.size()-1); i++) {
-			for(Object edge : graph.vertices.get(i).directedEdges) {
-				this.relax(graph.vertices.get(i), );
+		this.initSingleSource(graphLinkedList, sourceVertex, vertexCount);
+		for(int i = sourceVertex.id; i < (vertexCount-1); i++) {
+			Node source = graphLinkedList.search(i);
+			for(int j = 0; j < edgeCount; j++) {
+				this.relax(source, source.neighbors);
 			}
 		}
-		for(Object edge : ) {
+		for(int j = 0; j < edgeCount; j++) {
 			/*if() {
-			
+				return false;
 			}*/
 		}
 	}
