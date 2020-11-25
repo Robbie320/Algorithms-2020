@@ -7,15 +7,9 @@ public class Node {
     public Node prev;
     //public String item;
     
-    //For Graph Linked Objects
+    //For Graph Linked Objects / For Single Source Shortest Path (SSSP)
     public int id;
-    //public boolean hasBeenProcessed;
-    //public boolean markedForProcessing;
     public ArrayList<Edge> neighbors = new ArrayList<>();
-    
-    //For Single Source Shortest Path (SSSP)
-    public ArrayList<Node> vertices = new ArrayList<>();
-    //public ArrayList<Object> directedEdges = new ArrayList<>();
     //Node source
     //Node destination
     //int weight
