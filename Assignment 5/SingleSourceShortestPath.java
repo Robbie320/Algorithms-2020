@@ -12,12 +12,12 @@ public class SingleSourceShortestPath {
 		* 		v.d = ∞		//estimate of shortest path distance
 		* 		v.π = NIL	//predecessor vertex
 		*	s.d = 0 */
-		for(int i = 0; i < vertexCount; i++) {
+		for(int i = 1; i < vertexCount; i++) {
 			Node vertex = graphLinkedList.search(i);
-			vertex.distance = Integer.MAX_VALUE;
+			vertex.distance = Double.POSITIVE_INFINITY;
 			vertex.prevVertex = null;
 		}//end for i
-		sourceVertex.distance = 0;
+		sourceVertex.distance = 0.0;
 	}//end initSingleSource
 	public void bellmanFord(LinkedList graphLinkedList, Node sourceVertex, int vertexCount, int edgeCount) {
 		/*Bellman-Ford(G,w,s)
