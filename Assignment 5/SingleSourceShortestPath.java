@@ -12,10 +12,10 @@ public class SingleSourceShortestPath {
 		*	s.d = 0 */
 		for(int i = 1; i < vertexCount; i++) {
 			Node vertex = graphLinkedList.search(i);
-			vertex.distance = Double.POSITIVE_INFINITY;
+			vertex.distance = Integer.MAX_VALUE;
 			vertex.prevVertex = null;
 		}//end for i
-		sourceVertex.distance = 0.0;
+		sourceVertex.distance = 0;
 	}//end initSingleSource
 	public void bellmanFord(LinkedList graphLinkedList, Node sourceVertex, int vertexCount, int edgeCount) {
 		/*Bellman-Ford(G,w,s)
@@ -30,16 +30,36 @@ public class SingleSourceShortestPath {
 		this.initSingleSource(graphLinkedList, sourceVertex, vertexCount);
 		
 		Node source = null;
+		Node destination = null;
 		boolean relax;
+		String path = "";
+		int cost = 0;
+		boolean first = true;
+		
 		for(int i = 1 /*sourceVertex.id*/; i < (vertexCount-1); i++) {
+			System.out.print(sourceVertex.id + " -> " + (i+1) + " cost is ");
+			first = true;
 			for(int t = 1; t < vertexCount; t++) {
 				source = graphLinkedList.search(t);
 				for (int j = 0; j < source.neighbors.size(); j++) {
-					Node destination = source.neighbors.get(j).getDestination();
+					destination = source.neighbors.get(j).getDestination();
 					int weight = source.neighbors.get(j).getWeight();
 					relax = this.relax(graphLinkedList, source, destination, weight);
+					if(relax == false) {
+						cost += weight;
+						if (first) {
+							path += Integer.toString(source.id);
+							first = false;
+						} else {
+							path += " -> " + Integer.toString(destination.id);
+						}//end if
+					}else {
+					
+					}//end if
 				}//end for j
-			}//end t = 0
+			}//end for t
+			System.out.print(Integer.toString(cost) + "; " + path + ".");
+			System.out.println();
 		}//end for i
 	}//end bellmanFord
 	public boolean relax(LinkedList graphLinkedList, Node source, Node destination, int weight) {
@@ -54,7 +74,4 @@ public class SingleSourceShortestPath {
 		}//end if
 		return true;
 	}//end
-	public void printGraphOutput() {
-	
-	}//end printGraphOutput
 }//end class SingleSourceShortestPath
