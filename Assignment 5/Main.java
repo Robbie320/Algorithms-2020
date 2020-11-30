@@ -40,6 +40,7 @@ public class Main {
 		
 		
 		//GRAPHING//
+		System.out.println("Graphing With Directed Graphs (Single Source Shortest Path):");
 		//Initialize variables
 		LinkedList graphLinkedList = new LinkedList();
 		int vertexIDNum = 0;
@@ -52,6 +53,7 @@ public class Main {
 		
 		int sourceNum = 0;
 		int destinationNum = 0;
+		int weight = 0;
 		//Using commands in the list to set up the graphs
 		for(int c = 0; c < graphFileSize; c++) {
 			if(graphCommandList[c].contains("--")) {
@@ -67,6 +69,7 @@ public class Main {
 				edgeCount = 0;;
 				sourceNum = 0;
 				destinationNum = 0;
+				weight = 0;
 			} else if(graphCommandList[c].contains("add vertex")) { //Add Vertex
 				Node n = new Node();
 				String vertexIDStr = graphCommandList[c].replaceAll("[^\\d-]", "");
@@ -98,7 +101,7 @@ public class Main {
 				
 				sourceNum = Integer.parseInt(vertexStrOne[0]);
 				destinationNum = Integer.parseInt(vertexStrTwo[0]);
-				int weight = Integer.parseInt(vertexStrTwo[1]);
+				weight = Integer.parseInt(vertexStrTwo[1]);
 				
 				//Add the vertices to neighbors int Arraylist
 				Node sourceNode = graphLinkedList.search(sourceNum);
@@ -111,18 +114,20 @@ public class Main {
 				edgeCount++;
 				
 				if(c < graphFileSize-1) {
-					if(graphCommandList[c+1].isBlank()) {
+					if(graphCommandList[c+1].contains("--") || graphCommandList[c+1].isBlank()) {
 						Node firstVertexNode = graphLinkedList.search(firstVertex);
 						//Single Source Shortest Path (SSSP)
 						sssp.bellmanFord(graphLinkedList, firstVertexNode, vertexCount, edgeCount);
+						sssp.printSSSPOutput(graphLinkedList, firstVertexNode, vertexCount);
 						System.out.println();
-					}
+					}//end if
 				} else if(c == graphFileSize-1) {
 					Node firstVertexNode = graphLinkedList.search(firstVertex);
 					//Single Source Shortest Path (SSSP)
 					sssp.bellmanFord(graphLinkedList, firstVertexNode, vertexCount, edgeCount);
+					sssp.printSSSPOutput(graphLinkedList, firstVertexNode, vertexCount);
 					System.out.println();
-				}
+				}//end if
 			} else if(graphCommandList[c].isBlank()) {
 				//System.out.println("This is a blank.");
 				//System.out.println("\n");
@@ -134,6 +139,7 @@ public class Main {
 		
 		
 		//KNAPSACK - SPICE//
+		System.out.println("Fractional Knapsack With Spices:");
 		//Using commands in the list to set up the graphs
 		//Create Linked List
 		LinkedList spiceLinkedList = new LinkedList();
