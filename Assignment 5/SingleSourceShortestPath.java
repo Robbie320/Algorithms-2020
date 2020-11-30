@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 
 public class SingleSourceShortestPath {
-	Edge e;
-	//public ArrayList<Object> edges = new ArrayList<>();
-	
 	public void initSingleSource(LinkedList graphLinkedList, Node sourceVertex, int vertexCount) {
 		/*Init-Single-Source(G,s)
 		* 	for each v ∈ G.V
@@ -31,47 +28,55 @@ public class SingleSourceShortestPath {
 		
 		Node source = null;
 		Node destination = null;
-		boolean relax;
 		String path = "";
 		int cost = 0;
 		boolean first = true;
 		
 		for(int i = 1 /*sourceVertex.id*/; i < (vertexCount-1); i++) {
-			System.out.print(sourceVertex.id + " -> " + (i+1) + " cost is ");
-			first = true;
 			for(int t = 1; t < vertexCount; t++) {
 				source = graphLinkedList.search(t);
 				for (int j = 0; j < source.neighbors.size(); j++) {
 					destination = source.neighbors.get(j).getDestination();
 					int weight = source.neighbors.get(j).getWeight();
-					relax = this.relax(graphLinkedList, source, destination, weight);
-					if(relax == false) {
-						cost += weight;
-						if (first) {
-							path += Integer.toString(source.id);
-							first = false;
-						} else {
-							path += " -> " + Integer.toString(destination.id);
-						}//end if
-					}else {
-					
-					}//end if
+					this.relax(graphLinkedList, source, destination, weight);
 				}//end for j
 			}//end for t
-			System.out.print(Integer.toString(cost) + "; " + path + ".");
-			System.out.println();
 		}//end for i
 	}//end bellmanFord
-	public boolean relax(LinkedList graphLinkedList, Node source, Node destination, int weight) {
+	public boolean relax(LinkedList graphLinkedList, Node from, Node to, int weight) {
 		/*Relax(u,v,w)
 		* 	if v.d > u.d + w(u,v)
 		* 		v.d = u.d + w(u,v)
 		* 		v.π = u */
-		if(destination.distance > (source.distance + weight)) {
-			destination.distance = source.distance + weight;
-			destination.prevVertex = source;
+		if(to.distance > (from.distance + weight)) {
+			to.distance = from.distance + weight;
+			to.prevVertex = from;
 			return false;
 		}//end if
 		return true;
-	}//end
+	}//end relax
+	public void printSSSPOutput(LinkedList graphLinkedList, Node sourceVertex, int vertexCount) {
+		Node destination = null;
+		int cost = 0;
+		
+		for(int d = (sourceVertex.id+1); d < vertexCount; d++) {
+			destination = graphLinkedList.search(d);
+			
+			cost = destination.distance;
+			System.out.print(sourceVertex.id + " -> " + (d) + " cost is " + cost + "; path is " + sourceVertex.id);
+			
+			Node tempDestination = destination;
+			ArrayList<Node> tempArray = new ArrayList<>();
+			while(tempDestination.prevVertex != null) {
+				tempArray.add(tempDestination);
+				tempDestination = tempDestination.prevVertex;
+			}//end while
+			
+			for(int p = tempArray.size()-1; p > -1; p--) {
+				System.out.print(" -> " + tempArray.get(p).id);
+			}//end for p
+			System.out.print(".");
+			System.out.println();
+		}//end for d
+	}//end printOutput
 }//end class SingleSourceShortestPath
