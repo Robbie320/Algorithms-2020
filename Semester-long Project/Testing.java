@@ -1,5 +1,5 @@
 public class Testing {
-	public int test(Integer[] subjects, int start, int groupNumber, int groupSize) {
+	public boolean test(Integer[] subjects, int start, int groupSize) {
 		int patient;
 		int infectedNum = 0;
 		int stop = start+groupSize;
@@ -10,9 +10,9 @@ public class Testing {
 		for(int t = start; t < stop; t++) {
 			patient = subjects[t];
 			if(patient == 1) { //if subject is infected
-				infectedNum++;
+				return true; //even if one person is infected, whole group needs retesting
 			}
 		}//end for t
-		return infectedNum;
+		return false;
 	}//end test
 }//end class Testing
