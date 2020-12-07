@@ -56,34 +56,70 @@ public class Main {
 		}//end for n
 		
 		//Test groups in search of infected person denoted by 1
-		int infectedNum = 0;
+		int groupTestNum = 0; //the number of tests used in that group
 		int totTestNum = 0;
+		int groupInfectedNum = 0; //the number of infected people per group
+		boolean isInfected = false;
+		/*boolean group1Infected = false;
+		boolean group2Infected = false;*/
 		
 		int myCaseOne = 0;
 		int caseOneTestNum = 0;
-		
 		int myCaseTwo = 0;
 		int caseTwoTestNum = 0;
-		
 		int myCaseThree = 0;
 		int caseThreeTestNum = 0;
 		
 		for(int start = 0; start < totalPopSize; start+=groupSize) {
-			infectedNum = testing.test(subjects, start, groupNum, groupSize); //test that group number
-			if(infectedNum == 0) {
-				myCaseOne += 1;
+			groupInfectedNum = 0;
+			groupTestNum = 0;
+			
+			isInfected = testing.test(subjects, start, groupSize); //test that group number
+			groupTestNum++;
+			
+			if(isInfected) {
+				//Test first four in group for group size of 8
+				isInfected = testing.test(subjects, start, (groupSize/2));
+				groupTestNum++;
+				
+				if(isInfected) {
+					for(int individualTest = start; individualTest < (start+groupSize/2); individualTest++) {
+						isInfected = testing.test(subjects, individualTest, 1);
+						groupTestNum++;
+						
+						if(isInfected) {
+							groupInfectedNum++;
+						}
+					}
+				}
+				//Test second four in group for group size of 8
+				isInfected = testing.test(subjects, (start + groupSize/2), groupSize);
+				groupTestNum++;
+				
+				if(isInfected) {
+					for(int individualTest = (start + groupSize/2); start < groupSize; individualTest++) {
+						isInfected = testing.test(subjects, individualTest, 1);
+						groupTestNum++;
+						
+						if(isInfected) {
+							groupInfectedNum++;
+						}
+					}
+				}
+				
+				if(groupInfectedNum == 1) {
+					myCaseTwo++;
+					caseTwoTestNum += groupTestNum;
+					totTestNum += groupTestNum;
+				} else if(groupInfectedNum >= 2) {
+					myCaseThree++;
+					caseThreeTestNum += groupTestNum;
+					totTestNum += groupTestNum;
+				}
+			} else {
+				myCaseOne++;
 				caseOneTestNum++;
-				totTestNum += 1;
-			} else if(infectedNum == 1) {
-				myCaseTwo++;
-				caseTwoTestNum +=7;
-				totTestNum += 7;
-			} else if(infectedNum >= 2) {
-				myCaseThree++;
-				caseThreeTestNum += 11;
-				totTestNum += 11;
-			}else {
-				System.out.println("I don't know, something went wrong.");
+				totTestNum += groupTestNum;
 			}
 		}//end for y
 		
