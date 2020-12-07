@@ -70,7 +70,7 @@ public class Main {
 		int myCaseThree = 0;
 		int caseThreeTestNum = 0;
 		
-		for(int start = 0; start < totalPopSize; start+=groupSize) {
+		for(int start = 0; start < subjects.length; start+=groupSize) {
 			groupInfectedNum = 0;
 			groupTestNum = 0;
 			
@@ -125,10 +125,11 @@ public class Main {
 		
 		//MY RESULTS//
 		System.out.println("\n");
-		System.out.println("My Results:");
+		System.out.println("Simulation Results:");
 		System.out.printf("Case (1): " + groupNum + " x 0.8500" + " = " + myCaseOne + " instances requiring " + caseOneTestNum + " tests (there are no partial tests)\n");
 		System.out.printf("Case (2): " + groupNum + " x 0.1496" + " =  " + myCaseTwo + " instances requiring " + caseTwoTestNum + " tests\n");
-		System.out.printf("Case (3): " + groupNum + " x 0.0004" + " =   " + myCaseThree + " round up to 1 instance requiring " + caseThreeTestNum + " tests");
+		System.out.printf("Case (3): " + groupNum + " x 0.0004" + " =   " + myCaseThree + " requiring " + caseThreeTestNum + " tests");
+		
 		
 		//EXPECTED RESULT VALUES//
 		myInfectionRate = (double)totalInfected/(double)totalPopSize;
@@ -160,11 +161,13 @@ public class Main {
 		String caseTwoStrAns = String.format("%.2f", caseTwoAns);
 		caseTwoAns = Double.valueOf(caseTwoStrAns);
 		
-		//Print out Case Output
+		//EXPECTED RESULTS//
 		System.out.println("\n");
-		System.out.println("Expected Results Based on Simulation:");
-		System.out.printf("Case (1): " + groupNum + " x " + caseOneStr + " = " + caseOneStrAns + " instances requiring 107 tests (there are no partial tests)\n");
-		System.out.printf("Case (2): " + groupNum + " x " + caseTwoStr + " =  " + caseTwoStrAns + " instances requiring 131 tests\n");
-		System.out.printf("Case (3): " + groupNum + " x " + caseThreeStr + " =   " + caseThreeStrAns + " round up to 1 instance requiring 11 tests");
+		System.out.println("Expected Results:");
+		System.out.printf("Case (1): " + groupNum + " x " + caseOneStr + " = " + caseOneStrAns + " instances requiring " + caseOneTestNum + " tests (there are no partial tests)\n");
+		System.out.printf("Case (2): " + groupNum + " x " + caseTwoStr + " =  " + caseTwoStrAns + " instances requiring " + caseTwoTestNum + " tests\n");
+		System.out.printf("Case (3): " + groupNum + " x " + caseThreeStr + " =   " + caseThreeStrAns + " round up to " + Math.ceil(Double.parseDouble(caseThreeStrAns)) + " instance requiring " + caseThreeTestNum + " tests");
+		
+		System.out.println("\n\nTotal Number of Tests: " + totTestNum);
 	}//end main
 }//end Main Class
