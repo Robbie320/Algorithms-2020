@@ -2,7 +2,7 @@ public class Testing {
 	public boolean test(Integer[] subjects, int start, int groupSize) {
 		int patient;
 		int infectedNum = 0;
-		int stop = start+groupSize;
+		int stop = start + groupSize;
 		
 		if(stop > subjects.length) {
 			stop = subjects.length;
