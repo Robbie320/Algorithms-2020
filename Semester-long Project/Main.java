@@ -97,7 +97,7 @@ public class Main {
 				groupTestNum++;
 				
 				if(isInfected) {
-					for(int individualTest = (start + groupSize/2); start < groupSize; individualTest++) {
+					for(int individualTest = (start + groupSize/2); individualTest < (start+groupSize); individualTest++) {
 						isInfected = testing.test(subjects, individualTest, 1);
 						groupTestNum++;
 						
