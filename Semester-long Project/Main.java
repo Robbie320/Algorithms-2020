@@ -93,7 +93,7 @@ public class Main {
 					}
 				}
 				//Test second four in group for group size of 8
-				isInfected = testing.test(subjects, (start + groupSize/2), groupSize);
+				isInfected = testing.test(subjects, (start + groupSize/2), (groupSize/2));
 				groupTestNum++;
 				
 				if(isInfected) {
@@ -130,6 +130,8 @@ public class Main {
 		System.out.printf("Case (2): " + groupNum + " x 0.1496" + " =  " + myCaseTwo + " instances requiring " + caseTwoTestNum + " tests\n");
 		System.out.printf("Case (3): " + groupNum + " x 0.0004" + " =   " + myCaseThree + " requiring " + caseThreeTestNum + " tests");
 		
+		//Total number of tests performed
+		System.out.println("\n\nTotal Number of Tests: " + totTestNum);
 		
 		//EXPECTED RESULT VALUES//
 		myInfectionRate = (double)totalInfected/(double)totalPopSize;
@@ -171,12 +173,10 @@ public class Main {
 		double caseThreeExpected = groupNum * 0.0004;
 		
 		//EXPECTED RESULTS//
-		System.out.println("\n");
+		System.out.println("");
 		System.out.println("Expected Results:");
 		System.out.printf("Case (1): " + groupNum + " x 0.8500 = " + caseOneExpected + " instances requiring " + caseOneTestNum + " tests (there are no partial tests)\n");
 		System.out.printf("Case (2): " + groupNum + " x 0.1496 =  " + caseTwoExpected + " instances requiring " + caseTwoTestNum + " tests\n");
 		System.out.printf("Case (3): " + groupNum + " x 0.0004 =   " + caseThreeExpected + " round up to " + Math.ceil(caseThreeExpected) + " instance requiring " + caseThreeTestNum + " tests");
-		
-		System.out.println("\n\nTotal Number of Tests: " + totTestNum);
 	}//end main
 }//end Main Class
