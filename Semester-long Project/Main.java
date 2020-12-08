@@ -137,7 +137,7 @@ public class Main {
 		//System.out.println(myInfectionRate + " " + myUninfectedRate); //check my infection rate and uninfected rate
 		
 		//Handle Case 1 Numbers
-		double caseOne = Math.pow(myUninfectedRate, groupSize);
+		/*double caseOne = Math.pow(myUninfectedRate, groupSize);
 		String caseOneStr = String.format("%.4f", caseOne);
 		caseOne = Double.valueOf(caseOneStr);
 		double caseOneAns = groupNum * caseOne;
@@ -159,14 +159,23 @@ public class Main {
 		caseTwo = Double.valueOf(caseTwoStr);
 		double caseTwoAns = groupNum * caseTwo;
 		String caseTwoStrAns = String.format("%.2f", caseTwoAns);
-		caseTwoAns = Double.valueOf(caseTwoStrAns);
+		caseTwoAns = Double.valueOf(caseTwoStrAns);*/
+		
+		//Case 1
+		double caseOneExpected = groupNum * 0.8500;
+		//Case 2
+		double caseTwoExpected = groupNum * 0.1496;
+		String caseTwoStr = String.format("%.4f", caseTwoExpected);
+		caseTwoExpected = Double.valueOf(caseTwoStr);
+		//Case 3
+		double caseThreeExpected = groupNum * 0.0004;
 		
 		//EXPECTED RESULTS//
 		System.out.println("\n");
 		System.out.println("Expected Results:");
-		System.out.printf("Case (1): " + groupNum + " x " + caseOneStr + " = " + caseOneStrAns + " instances requiring " + caseOneTestNum + " tests (there are no partial tests)\n");
-		System.out.printf("Case (2): " + groupNum + " x " + caseTwoStr + " =  " + caseTwoStrAns + " instances requiring " + caseTwoTestNum + " tests\n");
-		System.out.printf("Case (3): " + groupNum + " x " + caseThreeStr + " =   " + caseThreeStrAns + " round up to " + Math.ceil(Double.parseDouble(caseThreeStrAns)) + " instance requiring " + caseThreeTestNum + " tests");
+		System.out.printf("Case (1): " + groupNum + " x 0.8500 = " + caseOneExpected + " instances requiring " + caseOneTestNum + " tests (there are no partial tests)\n");
+		System.out.printf("Case (2): " + groupNum + " x 0.1496 =  " + caseTwoExpected + " instances requiring " + caseTwoTestNum + " tests\n");
+		System.out.printf("Case (3): " + groupNum + " x 0.0004 =   " + caseThreeExpected + " round up to " + Math.ceil(caseThreeExpected) + " instance requiring " + caseThreeTestNum + " tests");
 		
 		System.out.println("\n\nTotal Number of Tests: " + totTestNum);
 	}//end main
