@@ -1,0 +1,147 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% CMPT 435
+% Fall 2020
+% Semester-long Project
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from: http://www.LaTeXTemplates.com
+% Original author: % Frits Wenneker (http://www.howtotex.com)
+% License: CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% Modified by Alan G. Labouseur  - alan@labouseur.com
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[letterpaper, 10pt,DIV=13]{scrartcl} 
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm,xfrac} % Math packages
+\usepackage{sectsty} % Allows customizing section commands
+\usepackage{graphicx}
+\usepackage[lined,linesnumbered,commentsnumbered]{algorithm2e}
+\usepackage{listings}
+\usepackage{parskip}
+\usepackage{lastpage}
+
+\allsectionsfont{\normalfont\scshape} % Make all section titles in default font and small caps.
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{page \thepage\ of \pageref{LastPage}} % Page numbering for right footer
+
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs.
+
+\binoppenalty=3000
+\relpenalty=3000
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+   \normalfont \normalsize 
+   \textsc{CMPT 435 - Fall 2020 - Dr. Labouseur} \\[10pt] % Header stuff.
+   \horrule{0.5pt} \\[0.25cm] 	% Top horizontal rule
+   \huge Semester-long Project   \\     	    % Assignment title
+   \horrule{0.5pt} \\[0.25cm] 	% Bottom horizontal rule
+}
+
+\author{Robert Perrone \\ \normalsize robert.perrone1@marist.edu}
+
+\date{\normalsize\today} 	% Today's date.
+
+\begin{document}
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%   RESULTS
+%----------------------------------------------------------------------------------------
+\section{Results}
+%----------------------------
+%   POPULATION OF 1,000
+%----------------------------
+\subsection{Population Size of 1,000}
+Simulation Results:\\
+Case (1): 125 x 0.8500 = 105 instances requiring 105 tests (there are no partial tests)\\
+Case (2): 125 x 0.1496 =  19 instances requiring 133 tests\\
+Case (3): 125 x 0.0004 =   1 requiring 7 tests\\
+\\
+Total Number of Tests: 245\\
+\\
+Expected Results:\\
+Case (1): 125 x 0.8500 = 106.25 instances requiring 105 tests (there are no partial tests)\\
+Case (2): 125 x 0.1496 =  18.7 instances requiring 133 tests\\
+Case (3): 125 x 0.0004 =   0.05 round up to 1.0 instance requiring 7 tests
+Process finished with exit code 0\\
+%----------------------------
+%   POPULATION OF 10,000
+%----------------------------
+\subsection{Population Size of 10,000}
+Simulation Results:\\
+Case (1): 1250 x 0.8500 = 1067 instances requiring 1067 tests (there are no partial tests)\\
+Case (2): 1250 x 0.1496 =  172 instances requiring 1204 tests\\
+Case (3): 1250 x 0.0004 =   11 requiring 93 tests\\
+\\
+Total Number of Tests: 2364\\
+\\
+Expected Results:\\
+Case (1): 1250 x 0.8500 = 1062.5 instances requiring 1067 tests (there are no partial tests)\\
+Case (2): 1250 x 0.1496 =  187.0 instances requiring 1204 tests\\
+Case (3): 1250 x 0.0004 =   0.5 round up to 1.0 instance requiring 93 tests\\
+%----------------------------
+%   POPULATION OF 100,000
+%----------------------------
+\subsection{Population Size of 100,000}
+Simulation Results:\\
+Case (1): 12500 x 0.8500 = 10698 instances requiring 10698 tests (there are no partial tests)\\
+Case (2): 12500 x 0.1496 =  1677 instances requiring 11739 tests\\
+Case (3): 12500 x 0.0004 =   125 requiring 1175 tests\\
+\\
+Total Number of Tests: 23612\\
+\\
+Expected Results:\\
+Case (1): 12500 x 0.8500 = 10625.0 instances requiring 10698 tests (there are no partial tests)\\
+Case (2): 12500 x 0.1496 =  1870.0 instances requiring 11739 tests\\
+Case (3): 12500 x 0.0004 =   5.0 round up to 5.0 instance requiring 1175 tests\\
+%----------------------------
+%   POPULATION OF 1,000,000
+%----------------------------
+\subsection{Population Size of 1,000,000}
+Simulation Results:\\
+Case (1): 125000 x 0.8500 = 106720 instances requiring 106720 tests (there are no partial tests)\\
+Case (2): 125000 x 0.1496 =  17012 instances requiring 119084 tests\\
+Case (3): 125000 x 0.0004 =   1268 requiring 11852 tests\\
+\\
+Total Number of Tests: 237656\\
+\\
+Expected Results:\\
+Case (1): 125000 x 0.8500 = 106250.0 instances requiring 106720 tests\\ (there are no partial tests)\\
+Case (2): 125000 x 0.1496 =  18700.0 instances requiring 119084 tests\\
+Case (3): 125000 x 0.0004 =   50.0 round up to 50.0 instance requiring 11852 tests\\
+
+\end{document}
