@@ -36,11 +36,11 @@ public class Main {
 		//Populate subjects array
 		for(int g = 0; g < totalPopSize; g++) {
 			//Is patient infected or not
-			int patient = random.nextInt(100);
-			if(patient <= 2) {//infection rate
+			int patient = random.nextInt(101);
+			if(patient > 0 && patient <= 2) {//infection rate
 				patient = 1;//infected
 				totalInfected++;
-			} else if(patient >= 3 && patient < 100) {
+			} else if(patient > 2 && patient <= 100) {
 				patient = 0;// not infected
 			}//end if
 			//Add patient to group
